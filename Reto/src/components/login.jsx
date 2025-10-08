@@ -1,10 +1,12 @@
 import { useState } from "react";
 import "../css/log.css";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function Log() {
   const [Usuario, setUsuario] = useState("");
   const [contraseña, setContraseña] = useState("");
+  const navigate = useNavigate();
 
   const Validation = (e) => {
     e.preventDefault();
@@ -14,10 +16,14 @@ function Log() {
           icon: "success",
           text: "ingreso exitoso",
           timer: 2000,
-        }).then(() => {
-          setUsuario("");
-          setContraseña("");
-        });
+        })
+          .then(() => {
+            setUsuario("");
+            setContraseña("");
+          })
+          .then(() => {
+            navigate("/Ingreso");
+          });
       } else {
         Swal.fire({
           icon: "error",
